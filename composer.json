@@ -1,0 +1,25 @@
+{
+    "name": "gdevilbat/account",
+    "description": "",
+    "authors": [
+        {
+            "name": "M.Aldi Nur Ibrahim",
+            "email": "maldinuribrahim@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gdevilbat\\SpardaCMS\\Modules\\Account\\Providers\\AccountServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Gdevilbat\\SpardaCMS\\Modules\\Account\\": ""
+        }
+    }
+}
