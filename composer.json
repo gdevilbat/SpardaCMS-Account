@@ -1,5 +1,6 @@
 {
-    "name": "gdevilbat/account",
+    "name": "gdevilbat/sparda-cms-account-module",
+    "type": "laravel-module",
     "description": "",
     "authors": [
         {
@@ -20,6 +21,19 @@
     "autoload": {
         "psr-4": {
             "Gdevilbat\\SpardaCMS\\Modules\\Account\\": ""
+        },
+        "exclude-from-classmap": [
+            "/preprocessor/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Gdevilbat\\SpardaCMS\\Modules\\Account\\Tests\\": "Tests"
         }
-    }
+    },
+    "archive": {
+        "exclude": ["/Tests", "/preprocessor"]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
