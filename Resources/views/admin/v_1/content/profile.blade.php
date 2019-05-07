@@ -111,7 +111,8 @@
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2">
                                     @if (!empty(session('global_message')))
-                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }}">
+                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }} alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                             {{session('global_message')['message']}}
                                         </div>
                                     @endif
@@ -198,7 +199,8 @@
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2">
                                     @if (!empty(session('global_message')))
-                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }}">
+                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }} alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                             {{session('global_message')['message']}}
                                         </div>
                                     @endif
@@ -257,7 +259,8 @@
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2">
                                     @if (!empty(session('global_message')))
-                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }}">
+                                        <div class="alert {{session('global_message')['status'] == 200 ? 'alert-info' : 'alert-warning' }} alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                             {{session('global_message')['message']}}
                                         </div>
                                     @endif
