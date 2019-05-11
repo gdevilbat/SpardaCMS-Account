@@ -15,14 +15,21 @@ use Hash;
 
 class AccountController extends CoreController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->user_m = new User_m;
+        $this->user_repository = new Repository(new User_m);
+        $this->user_account_m = new UserAccount_m;
+        $this->user_account_repository = new Repository(new UserAccount_m);
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $account = new Repository(new UserAccount_m);
-        $this->data['account'] = $account->with('user')->buildQueryByAttributes(['user_id' => Auth::user()->id])->first();
+        $this->data['account'] = $this->user_account_repository->with('user')->buildQueryByAttributes(['user_id' => Auth::user()->id])->first();
         return view('account::admin.'.$this->data['theme_cms']->value.'.content.profile', $this->data);
     }
 
@@ -39,7 +46,7 @@ class AccountController extends CoreController
 
         $data = $request->except('_token', '_method', 'name', 'email');
 
-        $user = User_m::find(Auth::user()['id']);
+        $user = $this->user_m->find(Auth::user()['id']);
         $user->email = $request->input('email');
         $user->name = $request->input('name');
 
@@ -50,9 +57,9 @@ class AccountController extends CoreController
         else
         {
 
-            $account = UserAccount_m::find(Auth::user()['id']);
+            $account = $this->user_account_repository->find(Auth::user()['id']);
             if(empty($account))
-                $account = new UserAccount_m;
+                $account = $this->user_account_m;
 
             foreach ($data as $key => $value) 
             {
@@ -109,7 +116,7 @@ class AccountController extends CoreController
                 'password' => 'required|min: 8|confirmed',
             ]);
 
-        $user = User_m::find(Auth::user()->id);
+        $user = $this->user_m->find(Auth::user()->id);
 
         if($user->password != '')
         {
