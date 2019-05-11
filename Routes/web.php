@@ -11,9 +11,6 @@
 |
 */
 
-Route::prefix('control')->group(function() {
-});
-
 Route::group(['prefix' => 'control'], function() {
     
 	Route::group(['middleware' => 'core.auth'], function() {
