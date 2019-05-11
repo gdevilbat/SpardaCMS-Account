@@ -14,13 +14,12 @@ class CreateUserAccountTable extends Migration
     public function up()
     {
         Schema::create('user_account', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('gender', 30);
             $table->string('phone_number', 30);
             $table->date('birthday');
             $table->text('address');
             $table->text('profile_image_url')->nullable();
-            $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
         });
 
