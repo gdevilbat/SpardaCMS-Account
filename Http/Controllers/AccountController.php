@@ -59,7 +59,7 @@ class AccountController extends CoreController
 
             $account = $this->user_account_repository->find(Auth::user()['id']);
             if(empty($account))
-                $account = $this->user_account_m;
+                $account = new $this->user_account_m;
 
             foreach ($data as $key => $value) 
             {
