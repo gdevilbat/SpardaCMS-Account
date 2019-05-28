@@ -62,7 +62,7 @@ class AccountServiceProvider extends ServiceProvider
     {
         $viewPath = resource_path('views/modules/account');
 
-        $sourcePath = __DIR__.'/../Resources/views';
+        $sourcePath = __DIR__.'/../resources/views';
 
         $this->publishes([
             $sourcePath => $viewPath
@@ -85,7 +85,7 @@ class AccountServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'account');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'account');
+            $this->loadTranslationsFrom(__DIR__ .'/../resources/lang', 'account');
         }
     }
 
