@@ -20,10 +20,10 @@ Route::group(['prefix' => 'control', 'middleware' => 'core.menu'], function() {
 	        =            Account CMS            =
 	        =============================================*/
 	        
-			    Route::get('profile', 'AccountController@index');
-			    Route::put('update-profile', 'AccountController@personal');
-			    Route::put('update-avatar', 'AccountController@avatar');
-			    Route::put('update-password', 'AccountController@password');
+			    Route::get('profile', 'AccountController@index')->name('account');
+			    Route::put('update-profile', 'AccountController@personal')->name('account');
+			    Route::put('update-avatar', 'AccountController@avatar')->name('account');
+			    Route::put('update-password', 'AccountController@password')->name('account');
 	        
 	        /*=====  End of Account CMS  ======*/
 		});
