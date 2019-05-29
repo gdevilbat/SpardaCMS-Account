@@ -1,4 +1,4 @@
-@extends('core::admin.'.$theme_cms->value.'.template')
+@extends('core::admin.'.$theme_cms->value.'.templates.parent')
 
 @section('title_dashboard', ' Account')
 
@@ -318,7 +318,6 @@
 {{-- End of Row --}}
 
 @endsection
-
 
 @section('page_level_js')
     {{Html::script(module_asset_url('core:assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js'))}}
