@@ -12,6 +12,7 @@ use Gdevilbat\SpardaCMS\Modules\Core\Repositories\Repository;
 
 use Auth;
 use Hash;
+use Storage;
 
 class AccountController extends CoreController
 {
@@ -87,7 +88,11 @@ class AccountController extends CoreController
             if ($request->file('profile_image_url')->isValid()) 
             {
                 $account = UserAccount_m::where('user_id', Auth::user()->id)->first();
+
+                $tmp = $account->profile_image_url;
                 $account->profile_image_url = $path;
+
+                Storage::disk('public')->delete($tmp);
 
                 if($account->update())
                 {
