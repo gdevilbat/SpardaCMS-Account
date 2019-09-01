@@ -136,7 +136,7 @@ class AccountController extends CoreController
         }
 
 
-        $user->password = bcrypt($request->input('password'));
+        $user->password = $request->input('password');
 
         if($user->update())
         {
