@@ -46,7 +46,7 @@
                                 @if(empty($account->profile_image_url))
                                     <img src="{{module_asset_url('core:assets/images/atomix_user31.png')}}" alt="" />
                                 @else
-                                    <img src="{{url('public/storage/'.$account->profile_image_url)}}" alt=""> 
+                                    <img src="{{Storage::url($account->profile_image_url)}}" alt=""> 
                                 @endif
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                                                 @if(!empty($account) && $account->profile_image_url != null)
-                                                    <img src="{{url('public/storage/'.$account->profile_image_url)}}" alt=""> 
+                                                    <img src="{{Storage::url($account->profile_image_url)}}" alt=""> 
                                                 @else
                                                     <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""> 
                                                 @endif

@@ -83,7 +83,7 @@ class AccountController extends CoreController
     {
         if ($request->hasFile('profile_image_url')) 
         {
-            $path = $request->profile_image_url->store('user_public/'.(string)Auth::user()->id, 'public');
+            $path = $request->profile_image_url->store('user_public/'.(string)Auth::user()->id);
 
             if ($request->file('profile_image_url')->isValid()) 
             {
@@ -92,7 +92,7 @@ class AccountController extends CoreController
                 $tmp = $account->profile_image_url;
                 $account->profile_image_url = $path;
 
-                Storage::disk('public')->delete($tmp);
+                Storage::disk()->delete($tmp);
 
                 if($account->update())
                 {
