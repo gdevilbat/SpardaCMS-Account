@@ -20,9 +20,9 @@ class AccountController extends CoreController
     {
         parent::__construct();
         $this->user_m = new User_m;
-        $this->user_repository = new Repository(new User_m);
+        $this->user_repository = new Repository(new User_m, resolve(\Gdevilbat\SpardaCMS\Modules\Role\Repositories\Contract\AuthenticationRepository::class));
         $this->user_account_m = new UserAccount_m;
-        $this->user_account_repository = new Repository(new UserAccount_m);
+        $this->user_account_repository = new Repository(new UserAccount_m, resolve(\Gdevilbat\SpardaCMS\Modules\Role\Repositories\Contract\AuthenticationRepository::class));
     }
     /**
      * Display a listing of the resource.
