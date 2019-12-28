@@ -16,6 +16,6 @@ class AccountDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(AccountModuleTableSeeder::class);
     }
 }
