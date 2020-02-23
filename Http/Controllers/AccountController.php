@@ -87,7 +87,11 @@ class AccountController extends CoreController
 
             if ($request->file('profile_image_url')->isValid()) 
             {
-                $account = UserAccount_m::where('user_id', Auth::user()->id)->first();
+                try {
+                    $account = UserAccount_m::where('user_id', Auth::user()->id)->firstOrFail();
+                } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                    return redirect()->back()->with('global_message', array('status' => 400,'message' => 'Update Your Profile Before Upload Image!'));
+                }
 
                 $tmp = $account->profile_image_url;
                 $account->profile_image_url = $path;
