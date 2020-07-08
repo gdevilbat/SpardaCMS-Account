@@ -30,7 +30,7 @@ class AccountController extends CoreController
      */
     public function index()
     {
-        $this->data['account'] = $this->user_account_repository->with('user')->buildQueryByAttributes(['user_id' => Auth::user()->id])->first();
+        $this->data['account'] = $this->user_account_repository->buildQueryByAttributes(['user_id' => Auth::user()->id])->with('user')->first();
         return view('account::admin.'.$this->data['theme_cms']->value.'.content.profile', $this->data);
     }
 
