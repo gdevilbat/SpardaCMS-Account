@@ -3,8 +3,8 @@
 @section('title_dashboard', ' Account')
 
 @section('page_level_css')
-    {{Html::style(module_asset_url('core:assets/metronic-v5/pages/css/profile.min.css'))}}
-    {{Html::style(module_asset_url('core:assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css'))}}
+    {{Html::style(module_asset_url('Core:assets/metronic-v5/pages/css/profile.min.css'))}}
+    {{Html::style(module_asset_url('Core:assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css'))}}
 @endsection
 
 @section('breadcrumb')
@@ -44,7 +44,7 @@
                         <div class="m-card-profile__pic">
                             <div class="m-card-profile__pic-wrapper">
                                 @if(empty($account->profile_image_url))
-                                    <img src="{{module_asset_url('core:assets/images/atomix_user31.png')}}" alt="" />
+                                    <img src="{{module_asset_url('Core:assets/images/atomix_user31.png')}}" alt="" />
                                 @else
                                     <img src="{{Storage::url($account->profile_image_url)}}" alt=""> 
                                 @endif
@@ -320,5 +320,5 @@
 @endsection
 
 @section('page_level_js')
-    {{Html::script(module_asset_url('core:assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js'))}}
+    {{Html::script(module_asset_url('Core:assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js'))}}
 @endsection
