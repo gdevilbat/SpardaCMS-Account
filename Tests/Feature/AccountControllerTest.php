@@ -37,7 +37,7 @@ class AccountControllerTest extends TestCase
 	         ->assertStatus(302)
     		 ->assertRedirect(action('\Gdevilbat\SpardaCMS\Modules\Core\Http\Controllers\Auth\LoginController@showLoginForm')); // Return Not Valid, User Not Login
 
-		$user = \App\User::find(1);
+		$user = \App\Models\User::find(1);
 
 		$this->actingAs($user)
         				 ->from(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))
@@ -75,7 +75,7 @@ class AccountControllerTest extends TestCase
 	         ->assertStatus(302)
     		 ->assertRedirect(action('\Gdevilbat\SpardaCMS\Modules\Core\Http\Controllers\Auth\LoginController@showLoginForm')); // Return Not Valid, User Not Login
 
-		$user = \App\User::find(1);
+		$user = \App\Models\User::find(1);
 
 		$this->actingAs($user)
         				 ->from(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))

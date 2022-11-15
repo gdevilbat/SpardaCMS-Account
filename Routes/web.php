@@ -16,6 +16,9 @@ Route::group(['prefix' => 'control', 'middleware' => 'core.menu'], function() {
 	Route::group(['middleware' => 'core.auth'], function() {
 
 		Route::group(['prefix' => 'account'], function() {
+
+			Route::post('me', 'AccountController@me')->name('account');
+
 	        /*=============================================
 	        =            Account CMS            =
 	        =============================================*/

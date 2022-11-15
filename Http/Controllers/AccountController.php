@@ -24,6 +24,12 @@ class AccountController extends CoreController
         $this->user_account_m = new UserAccount_m;
         $this->user_account_repository = new Repository(new UserAccount_m, resolve(\Gdevilbat\SpardaCMS\Modules\Role\Repositories\Contract\AuthenticationRepository::class));
     }
+
+    public function me()
+    {
+        return \Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
