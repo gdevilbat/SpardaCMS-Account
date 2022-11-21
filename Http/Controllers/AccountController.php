@@ -27,7 +27,17 @@ class AccountController extends CoreController
 
     public function me()
     {
-        return \Auth::user();
+        $user = $this->user_repository->with('userAccount')->findOrFail(\Auth::id());
+
+        if(empty($user->userAccount)){
+            $user->account = [];
+        }else{
+            $user->account = $user->userAccount;
+        }
+
+        $user->makeHidden(['userAccount']);
+
+        return $user;
     }
 
     /**
@@ -59,7 +69,15 @@ class AccountController extends CoreController
 
         if(!$user->save())
         {
-            return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Email!'));
+            if($request->ajax()){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Failed To Update Email!',
+                    'code' => 400
+                ]);
+            }else{
+                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Email!'));
+            }
         }
         else
         {
@@ -76,11 +94,27 @@ class AccountController extends CoreController
 
             if($account->save())
             {
-                return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Update Profile!'));
+                if($request->ajax()){
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Successfully Update Profile!',
+                        'code' => 200
+                    ]);
+                }else{
+                    return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Update Profile!'));
+                }
             }
             else
             {
-                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Profile!'));
+                if($request->ajax()){
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Failed To Update Profile!',
+                        'code' => 400
+                    ]);
+                }else{
+                    return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Profile!'));
+                }
             }
         }
     }
@@ -96,7 +130,15 @@ class AccountController extends CoreController
                 try {
                     $account = UserAccount_m::where('user_id', Auth::user()->id)->firstOrFail();
                 } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-                    return redirect()->back()->with('global_message', array('status' => 400,'message' => 'Update Your Profile Before Upload Image!'));
+                    if($request->ajax()){
+                        return response()->json([
+                            'status' => true,
+                            'message' => 'Update Your Profile Before Upload Image!',
+                            'code' => 400
+                        ]);
+                    }else{
+                        return redirect()->back()->with('global_message', array('status' => 400,'message' => 'Update Your Profile Before Upload Image!'));
+                    }
                 }
 
                 $tmp = $account->profile_image_url;
@@ -106,22 +148,54 @@ class AccountController extends CoreController
 
                 if($account->update())
                 {
-                    return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Update Avatar!'));
+                    if($request->ajax()){
+                        return response()->json([
+                            'status' => true,
+                            'message' => 'Successfully Update Avatar!',
+                            'code' => 200
+                        ]);
+                    }else{
+                        return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Update Avatar!'));
+                    }
                     
                 }
                 else
                 {
-                    return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Avatar!'));
+                    if($request->ajax()){
+                        return response()->json([
+                            'status' => true,
+                            'message' => 'Failed To Update Avatar!',
+                            'code' => 400
+                        ]);
+                    }else{
+                        return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Update Avatar!'));
+                    }
                 }
             }
             else
             {
-                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Upload Image!'));
+                if($request->ajax()){
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Failed To Upload Image!',
+                        'code' => 400
+                    ]);
+                }else{
+                    return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Upload Image!'));
+                }
             }
         }
         else
         {
-            return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Photo Not Found'));
+            if($request->ajax()){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Photo Not Found',
+                    'code' => 400
+                ]);
+            }else{
+                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Photo Not Found'));
+            }
         }
     }
 
@@ -141,7 +215,15 @@ class AccountController extends CoreController
 
             if(!Hash::check($request->input('old_password'), $user->password))
             {
-                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Wrong Old Password'));
+                if($request->ajax()){
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Wrong Old Password',
+                        'code' => 400
+                    ]);
+                }else{
+                    return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Wrong Old Password'));
+                }
             }
         }
 
@@ -150,11 +232,27 @@ class AccountController extends CoreController
 
         if($user->update())
         {
-            return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Change Password!'));
+            if($request->ajax()){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Successfully Change Password!',
+                    'code' => 200
+                ]);
+            }else{
+                return redirect(action('\Gdevilbat\SpardaCMS\Modules\Account\Http\Controllers\AccountController@index'))->with('global_message', array('status' => 200,'message' => 'Successfully Change Password!'));
+            }
         }
         else
         {
-            return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Change Password'));
+            if($request->ajax()){
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Failed To Change Password',
+                    'code' => 400
+                ]);
+            }else{
+                return redirect()->back()->with('global_message', array('status' => 400, 'message' => 'Failed To Change Password'));
+            }
         }
     }
 }
