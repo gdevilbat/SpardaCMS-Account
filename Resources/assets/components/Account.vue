@@ -266,6 +266,27 @@
         components: {
             Loading,
         },
+        metaInfo(){
+			return {
+				script: [
+					{
+						skip: !this.$parent.vendor_loaded, 
+						type: 'text/javascript', 
+						src: "/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js", 
+						defer:true, 
+						body: true
+					},
+                    {
+                        skip: !this.$parent.vendor_loaded,
+                        type: 'text/javascript', 
+						src: "/metronic-v5/app/js/callback.js", 
+						defer:true, 
+						body: true,
+                        callback: () => (this.updateScript())
+                    }
+				],
+			}
+		},
         data(){
             return{
                 loading: false,
@@ -300,67 +321,41 @@
         },
         mounted(){
             this.$nextTick(() => {
-                let self = this;
-                let vendor = this.$parent.libSelector(this.$parent.vendor_bundle);
-                vendor.addEventListener('load', (event) => {
+                autosize($(".autosize"));
 
-                    if(!this.$parent.isLoadedScript(this.$route.meta.APP_URL+"/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js")){
-                        let doc = document.createElement('script');  
-                        doc.setAttribute('src',this.$route.meta.APP_URL+"/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js");
-                        doc.setAttribute('type', 'text/javascript');
+                $(".phone").keyup(function(event) {
+                    var phone = this.value;
+                    for(var i = 0; i < phone.length; i++){
+                        var valid_number;
 
-                        doc.addEventListener('load', (event) => {
+                        if(phone.charAt(0) == '0')
+                        {
+                            valid_number = window.setCharAt(phone, 0, '');
+                            $(this).val(valid_number);
+                        }
 
-                        });
-                
-                        document.body.appendChild(doc);
+                        if(!phone.charAt(i).match(/[0-9]/))
+                        {
+                            valid_number = window.setCharAt(phone, i, '');
+                            $(this).val(valid_number);
+                        }
+                    }
+                });
+
+                $(".phone").keydown(function(event) {
+                    var number = [8, 37, 39, 48, 49, 50, 51, 52 , 53, 54, 55, 56, 57];
+                    var value  = $.inArray(event.keyCode, number);
+                    if(value !== -1)
+                    {
+                        if(this.value.length === 0)
+                        {
+                            if(event.keyCode === 48)
+                                return false;
+                        }
+                        return true;
                     }
 
-                   autosize($(".autosize"));
-                   window.$(".date-picker").datepicker();
-
-                    $(".phone").keyup(function(event) {
-                        var phone = this.value;
-                        for(var i = 0; i < phone.length; i++){
-                            var valid_number;
-
-                            if(phone.charAt(0) == '0')
-                            {
-                                valid_number = window.setCharAt(phone, 0, '');
-                                $(this).val(valid_number);
-                            }
-
-                            if(!phone.charAt(i).match(/[0-9]/))
-                            {
-                                valid_number = window.setCharAt(phone, i, '');
-                                $(this).val(valid_number);
-                            }
-                        }
-                    });
-
-                    $(".phone").keydown(function(event) {
-                        var number = [8, 37, 39, 48, 49, 50, 51, 52 , 53, 54, 55, 56, 57];
-                        var value  = $.inArray(event.keyCode, number);
-                        if(value !== -1)
-                        {
-                            if(this.value.length === 0)
-                            {
-                                if(event.keyCode === 48)
-                                    return false;
-                            }
-                            return true;
-                        }
-
-                        return false;
-                    });
-
-                    window.$("[name='birthday']").on('changeDate',function() {
-                        // Create native event
-                        const event = new Event('input', { bubbles: true });
-
-                        // Dispatch the event on "native" element
-                        this.dispatchEvent(event);
-                    });
+                    return false;
                 });
             });
         },
@@ -460,6 +455,16 @@
                     //handle error
                     self.loading = false;
                     self.errors = error.response.data.errors
+                });
+            },
+            updateScript(){
+                window.$(".date-picker").datepicker();
+                window.$("[name='birthday']").on('changeDate',function() {
+                    // Create native event
+                    const event = new Event('input', { bubbles: true });
+
+                    // Dispatch the event on "native" element
+                    this.dispatchEvent(event);
                 });
             }
         },
