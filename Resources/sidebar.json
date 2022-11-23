@@ -1,0 +1,8 @@
+[
+    {
+        "text": "Account",
+        "type": "link",
+        "name": "account-profile",
+        "icon": "flaticon-user-settings"
+    }
+]
