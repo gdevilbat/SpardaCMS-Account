@@ -260,7 +260,7 @@
     import $ from 'jquery'
     import Loading from 'vue-loading-overlay'
 
-    import autosize from '../../../../Core/assets/js/autosize.min.js'
+    import autosize from '^/Core/assets/js/autosize.min.js'
 
     export default {
         components: {
@@ -472,6 +472,6 @@
 </script>
 <style lang="scss" scoped>
     @import 'vue-loading-overlay/dist/vue-loading.css';
-    @import '../../../../Core/assets/metronic-v5/pages/css/profile.min.css';
-    @import '../../../../Core/assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css';
+    @import '^/Core/assets/metronic-v5/pages/css/profile.min.css';
+    @import '^/Core/assets/metronic-v5/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css';
 </style>
