@@ -37,7 +37,15 @@ class AccountController extends CoreController
 
         $user->makeHidden(['userAccount']);
 
-        return $user;
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'user' => $user,
+                'permissions' => [
+                    'create_user' => Auth::user()->can('create-user')
+                ]
+            ]
+        ]);
     }
 
     /**
