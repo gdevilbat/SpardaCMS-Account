@@ -9,7 +9,7 @@
                         </div>
                         <div class="m-card-profile__pic">
                             <div class="m-card-profile__pic-wrapper">
-                                <img v-bind:src="avatar" alt="" />
+                                <img :src="avatar" alt="" />
                             </div>
                         </div>
                         <div class="m-card-profile__details">
@@ -69,10 +69,10 @@
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="m_user_profile_tab_1">
-                        <form class="m-form m-form--fit m-form--label-align-right" v-on:submit.prevent="submitProfile($event)">
+                        <form class="m-form m-form--fit m-form--label-align-right" @submit.prevent="submitProfile($event)">
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2" v-if="updated.status">
-                                    <div class="alert alert-dismissible fade show" v-bind:class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
+                                    <div class="alert alert-dismissible fade show" :class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                         {{updated.message}}
                                     </div>
@@ -151,10 +151,10 @@
                         </form>
                     </div>
                     <div class="tab-pane " id="m_user_profile_tab_2">
-                        <form class="m-form m-form--fit m-form--label-align-right" v-on:submit.prevent="submitAvatar($event)">
+                        <form class="m-form m-form--fit m-form--label-align-right" @submit.prevent="submitAvatar($event)">
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2" v-if="updated.status">
-                                    <div class="alert alert-dismissible fade show" v-bind:class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
+                                    <div class="alert alert-dismissible fade show" :class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                         {{updated.message}}
                                     </div>
@@ -201,10 +201,10 @@
                         </form>
                     </div>
                     <div class="tab-pane " id="m_user_profile_tab_3">
-                        <form class="m-form m-form--fit m-form--label-align-right" v-on:submit.prevent="submitPassword($event)">
+                        <form class="m-form m-form--fit m-form--label-align-right" @submit.prevent="submitPassword($event)">
                             <div class="m-portlet__body">
                                 <div class="col-md-5 offset-md-2" v-if="updated.status">
-                                    <div class="alert alert-dismissible fade show" v-bind:class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
+                                    <div class="alert alert-dismissible fade show" :class="{'alert-info': updated.code == 200, 'alert-danger': updated.code != 200}">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                                         {{updated.message}}
                                     </div>
