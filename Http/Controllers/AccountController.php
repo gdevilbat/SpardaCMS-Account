@@ -27,7 +27,7 @@ class AccountController extends CoreController
 
     public function me()
     {
-        $user = $this->user_repository->with('userAccount')->findOrFail(\Auth::id());
+        $user = $this->user_repository->with(['userAccount', 'role'])->findOrFail(\Auth::id());
 
         if(empty($user->userAccount)){
             $user->account = [];
@@ -42,7 +42,8 @@ class AccountController extends CoreController
             'data' => [
                 'user' => $user,
                 'permissions' => [
-                    'create_user' => Auth::user()->can('create-user')
+                    'create-user' => Auth::user()->can('create-user'),
+                    'create-role' => Auth::user()->can('create-role')
                 ]
             ]
         ]);
