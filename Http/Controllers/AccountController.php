@@ -44,7 +44,8 @@ class AccountController extends CoreController
                 'permissions' => [
                     'super-access' => Auth::user()->can('super-access'),
                     'create-user' => Auth::user()->can('create-user'),
-                    'create-role' => Auth::user()->can('create-role')
+                    'create-role' => Auth::user()->can('create-role'),
+                    'create-taxonomy' => Auth::user()->can('create-taxonomy'),
                 ]
             ]
         ]);
