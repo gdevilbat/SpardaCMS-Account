@@ -1,5 +1,5 @@
 {
-    "name": "gdevilbat/sparda-cms-account-module",
+    "name": "gdevilbat/account-module",
     "type": "laravel-module",
     "description": "",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "gdevilbat/sparda-cms-core-module": "^5.7.18"
+        "gdevilbat/core-module": "^5.7.18"
     },
     "extra": {
         "laravel": {
